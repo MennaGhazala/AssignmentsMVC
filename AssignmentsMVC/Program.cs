@@ -19,6 +19,7 @@ namespace AssignmentsMVC
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CompanyDbContext>(options =>
             {
+               
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 

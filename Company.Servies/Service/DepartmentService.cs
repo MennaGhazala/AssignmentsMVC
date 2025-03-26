@@ -20,6 +20,7 @@ namespace Company.Servies.Service
                 Code = department.Code,
                 Name = department.Name,
                 CreateAt = DateTime.Now,
+                IsDeleted = false,
             };
             _departmentRepository.Add(mappedDepartment);
         }
@@ -41,7 +42,8 @@ namespace Company.Servies.Service
             if (id is null) return null;
             var department = _departmentRepository.GetById(id.Value);
             if (department == null)
-                return null; return department;
+                return null;
+            return department;
         }
         public void Update(Department department)
         {

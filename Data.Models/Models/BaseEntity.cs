@@ -8,7 +8,7 @@ namespace Company.Data.Models
 {
     public class BaseEntity
     {
-        public  int Id;
+        public  int Id { get; set; }
         public bool IsDeleted {  get; set; } = false;
         public DateTime CreateAt { get; set; } = DateTime.Now;
     }

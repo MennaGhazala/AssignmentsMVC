@@ -12,6 +12,6 @@ namespace Company.Data.Models
 
         public string Code { get; set; }
 
-        public IEnumerable<Employee> Employees { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }

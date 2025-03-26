@@ -6,9 +6,14 @@
 <h1>Create New Department</h1>
 <br />
 <br />
-<form asp-action="Create" >
-	
+@foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+{
+    <p class="text-danger">@modelError.ErrorMessage</p>
+}
 
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    
     <div class="form-group">
         <label class="col-form-label" asp-for="Code"></label>
         <input type="text" asp-for="Code" class="form-control"  />

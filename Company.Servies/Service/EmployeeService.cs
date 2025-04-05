@@ -39,16 +39,22 @@ namespace Company.Servies.Service
            _unitOfWork.EmployeeRepository.GetEmployeeByName(name);
         
 
-        void IEmployeeService.Add(Employee department)
+        void IEmployeeService.Add(Employee employee)
         {
-            var mappedDepartment = new Department
+            var mappedEmployee = new Employee
             {
                 
-                Name = department.Name,
+                Name = employee.Name,
+                Age = employee.Age,
+                Salary = employee.Salary,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+                HiringDate = employee.HiringDate,
+                ImageUrl = employee.ImageUrl,
                 CreateAt = DateTime.Now,
                 IsDeleted = false,
             };
-            _unitOfWork.DepartmentRepository.Add(mappedDepartment);
+            _unitOfWork.EmployeeRepository.Add(mappedEmployee);
 
             _unitOfWork.Complete();
         }

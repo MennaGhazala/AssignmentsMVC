@@ -1,16 +1,16 @@
 ﻿using Company.Data.Models;
 using Company.Repository.Interfaces;
-using Company.Servies.Interface;
+using Company.Servies.Interface.Departments;
 
 namespace Company.Servies.Service
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        public DepartmentService(IUnitOfWork unitOfWork)
         {
-            _departmentRepository = departmentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void Add(Department department)
@@ -22,17 +22,20 @@ namespace Company.Servies.Service
                 CreateAt = DateTime.Now,
                 IsDeleted = false,
             };
-            _departmentRepository.Add(mappedDepartment);
+            _unitOfWork.DepartmentRepository.Add(mappedDepartment);
+
+            _unitOfWork.Complete();
         }
 
         public void Delete(Department department)
         {
-            _departmentRepository.Delete(department);
+            _unitOfWork.DepartmentRepository.Delete(department);
+            _unitOfWork.Complete();
         }
 
         public IEnumerable<Department> GetAll()
         {
-            var departmens = _departmentRepository.GetAll();
+            var departmens = _unitOfWork.DepartmentRepository.GetAll();
             return departmens;
         }
 
@@ -40,15 +43,16 @@ namespace Company.Servies.Service
         public Department GetById(int? id)
         {
             if (id is null) return null;
-            var department = _departmentRepository.GetById(id.Value);
+            var department = _unitOfWork.DepartmentRepository.GetById(id.Value);
             if (department == null)
                 return null;
             return department;
         }
         public void Update(Department department)
         {
-            
-            _departmentRepository.Update(department);
+
+            _unitOfWork.DepartmentRepository.Update(department);
+            _unitOfWork.Complete();
         }
 
 

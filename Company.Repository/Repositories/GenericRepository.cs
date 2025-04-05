@@ -18,7 +18,7 @@ namespace Company.Repository.Repositories
         }
         public void Add(T Entity) {
             _context.Add(Entity);
-            _context.SaveChanges();
+            
                 }
         
         
@@ -26,7 +26,7 @@ namespace Company.Repository.Repositories
         public void Delete(T Entity)
         {
             _context.Remove(Entity);
-            _context.SaveChanges();
+           
         }
 
 
@@ -37,7 +37,7 @@ namespace Company.Repository.Repositories
         public void Update(T Entity)
         {
             _context.Update(Entity);
-            _context.SaveChanges();
+           
         }
         IEnumerable<T> IGenericRepository<T>.GetAll()
         => _context.Set<T>().ToList();

@@ -13,7 +13,12 @@ namespace Company.Repository.Repositories
             _context = context;
         }
 
-        public Employee GetEmployeeByName(string name)
-        =>_context.Set<Employee>().FirstOrDefault(x=>x.Name==name);
+        public IEnumerable<Employee> GetEmployeeByAddress(string address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable< Employee >GetEmployeeByName(string name)
+        =>_context.Set<Employee>().Where(x=>x.Name.Trim() .ToLower().Contains(name.Trim().ToLower())).ToList();
     }
 }

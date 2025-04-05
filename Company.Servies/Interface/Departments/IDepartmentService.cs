@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Company.Servies.Interface
+namespace Company.Servies.Interface.Departments
 {
     public interface IDepartmentService
     {

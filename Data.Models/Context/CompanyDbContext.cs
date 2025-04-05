@@ -18,6 +18,8 @@ namespace Company.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           //modelBuilder.Entity<BaseEntity>().HasQueryFilter(x => !x.IsDeleted);
+            
         }
         public DbSet <Department> Departments { get; set; }
        public DbSet <Employee> Employees { get; set; }

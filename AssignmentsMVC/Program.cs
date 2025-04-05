@@ -1,7 +1,8 @@
 using Company.Data.Context;
 using Company.Repository.Interfaces;
 using Company.Repository.Repositories;
-using Company.Servies.Interface;
+using Company.Servies.Interface.Departments;
+using Company.Servies.Interface.Employees;
 using Company.Servies.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -23,9 +24,11 @@ namespace AssignmentsMVC
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            // builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

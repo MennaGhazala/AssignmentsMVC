@@ -12,10 +12,12 @@ namespace Company.Web.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IDepartmentService _departmentService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, IDepartmentService departmentService)
         {
             _employeeService = employeeService;
+            _departmentService = departmentService;
         }
         public IActionResult Index(string searchInp)
         {
@@ -32,8 +34,10 @@ namespace Company.Web.Controllers
         }
         [HttpGet]
        public IActionResult Create ()
-       { 
-            return View();
+       {
+            var departments = _departmentService.GetAll(); 
+            return View(departments);
+           // ViewBag,ViewData,TempData
        }
         [HttpPost]
        public IActionResult Create(Employee employee)

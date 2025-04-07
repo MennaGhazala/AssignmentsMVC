@@ -25,7 +25,7 @@ namespace Company.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Company.Data.Models.Department", b =>
+            modelBuilder.Entity("Company.Data.Models.DepartmentViewModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,14 +107,14 @@ namespace Company.Data.Migrations
 
             modelBuilder.Entity("Company.Data.Models.T", b =>
                 {
-                    b.HasOne("Company.Data.Models.Department", "Department")
+                    b.HasOne("Company.Data.Models.DepartmentViewModel", "DepartmentViewModel")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
-                    b.Navigation("Department");
+                    b.Navigation("DepartmentViewModel");
                 });
 
-            modelBuilder.Entity("Company.Data.Models.Department", b =>
+            modelBuilder.Entity("Company.Data.Models.DepartmentViewModel", b =>
                 {
                     b.Navigation("Employees");
                 });

@@ -2,6 +2,7 @@
 using Company.Data.Models;
 using Company.Repository.Interfaces;
 using Company.Servies.Interface.Departments;
+using Company.Servies.Interface.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -27,7 +28,7 @@ namespace Company.Web.Controllers
             return View();
        }
         [HttpPost]
-       public IActionResult Create(Department department)
+       public IActionResult Create(DepartmentDto department)
         {
             try
              {
@@ -77,7 +78,7 @@ namespace Company.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult Update(int id ,Department department)
+        public IActionResult Update(int id ,DepartmentDto department)
 
         {
             if (department.Id !=id)

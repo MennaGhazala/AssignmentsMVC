@@ -3,6 +3,7 @@ using Company.Repository.Interfaces;
 using Company.Repository.Repositories;
 using Company.Servies.Interface.Departments;
 using Company.Servies.Interface.Employees;
+using Company.Servies.Mapping;
 using Company.Servies.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -29,6 +30,9 @@ namespace AssignmentsMVC
 
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddAutoMapper(x => x.AddProfile(new EmployeeProfile()));
+            builder.Services.AddAutoMapper(x => x.AddProfile(new DepartmentProfile()));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -2,7 +2,9 @@
 using Company.Data.Models;
 using Company.Repository.Interfaces;
 using Company.Servies.Interface.Departments;
+using Company.Servies.Interface.Dto;
 using Company.Servies.Interface.Employees;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -21,26 +23,28 @@ namespace Company.Web.Controllers
         }
         public IActionResult Index(string searchInp)
         {
+            IEnumerable<EmployeeDto> employees = new List<EmployeeDto>();
             if (string.IsNullOrEmpty(searchInp))
-            {
-                var employee = _employeeService.GetAll();
-                return View(employee);
-            }
+            
+                employees = _employeeService.GetAll();
+                
+            
             else
-            {
-                var employees = _employeeService.GetEmployeeByName(searchInp);
+            
+                 employees = _employeeService.GetEmployeeByName(searchInp);
                 return View(employees);
-            }
+            
         }
         [HttpGet]
        public IActionResult Create ()
        {
-            var departments = _departmentService.GetAll(); 
-            return View(departments);
+            ViewBag.Departments= _departmentService.GetAll(); 
+            return View();
            // ViewBag,ViewData,TempData
        }
-        [HttpPost]
-       public IActionResult Create(Employee employee)
+       [HttpPost]
+       public IActionResult Create(EmployeeDto employeeDto)
+        
         {
             try
              {
@@ -48,12 +52,12 @@ namespace Company.Web.Controllers
                 
 
                 if (ModelState.IsValid) {
-                    _employeeService.Add(employee);
+                    _employeeService.Add(employeeDto);
                   return RedirectToAction(nameof(Index));
 
                }
                  ModelState.AddModelError("DepartmentError ", "validationError");
-             return View(employee);
+             return View(employeeDto);
 
 
 
@@ -61,13 +65,13 @@ namespace Company.Web.Controllers
              catch (Exception ex)
              {
                  ModelState.AddModelError("DepartmentError ", ex .Message);
-                 return View(employee);
+                 return View(employeeDto);
 
 
              }
 
        }
-
+        /*
 
         [HttpGet]
          public IActionResult Details(int? id, string ViewName = "Details") 
@@ -90,7 +94,7 @@ namespace Company.Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult Update(int id , Employee employee)
+        public IActionResult Update(int id , Data.Models.Employee employee)
 
         {
             if (employee.Id !=id)
@@ -116,7 +120,7 @@ namespace Company.Web.Controllers
             _employeeService.Delete(department);
             return RedirectToAction(nameof(Index));
 
-        }
+        }*/
 
     }
 }
